@@ -10,4 +10,7 @@ export default class List{
     get GetTask(){
         return this.#Tasks
     }
+    modifyTasks(param1, param2){
+        this.#Tasks[param1] = param2;
+    }
 }
