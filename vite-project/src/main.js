@@ -33,5 +33,8 @@ I need:
 * print the infor in the screen
 -- UPDATE
 * access to information that was it stacking
-* added new info that will remplace for the old info
+* add new info that will remplace to the old info
+* acces the new info
+* save the new info 
+* remplace the old info
 */
