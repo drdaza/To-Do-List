@@ -13,4 +13,7 @@ export default class List{
     modifyTasks(param1, param2){
         this.#Tasks[param1] = param2;
     }
+    deleteTasks(param1){
+        this.#Tasks.splice(param1, 1);
+    }
 }
