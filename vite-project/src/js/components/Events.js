@@ -82,7 +82,7 @@ export function ModifyTasky(param, number){
                     `   
                     <label>
                         ${letra}
-                    <label>
+                    </label>
                     <div>
                     <button class="edit-button" id="edit-button-${number}">Edit </button>
                     <button class="delete-button" id="delete-button-${number}">Delete </button>
