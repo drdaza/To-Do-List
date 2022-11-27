@@ -4,11 +4,15 @@ import { createList, eventClickAddTask } from './js/components/Events'
 
 
 document.querySelector('#app').innerHTML = /* html */`
-  <div>
+    <div id="info-app">
     <h1>Task List!!!</h1>
+    <p>
+    Hi, this is a "To Do List", for add a new task, you should write the task and press the button, the task will add in the list, you can modify, check, and delete that task if you want, thank for have used this list.
+    </p>
+    </div>
     <div class="card">
       <label for="task"> Enter a new task: 
-        <input type = "text"  id="task">
+        <input type = "text"  id="task" maxlength="50">
       </label>
       <button id="add-task" type="button">Add Task</button>
     </div>
@@ -16,7 +20,7 @@ document.querySelector('#app').innerHTML = /* html */`
       <ul id="list">
       </ul>
     </div>
-  </div>
+  
 `
 
 createList();

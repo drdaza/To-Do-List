@@ -1,0 +1,13 @@
+#info-app{
+    max-width: 30%;
+}
+#list-space{
+    width: 35%;
+    #list{
+        width: 100%;
+        div{
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}

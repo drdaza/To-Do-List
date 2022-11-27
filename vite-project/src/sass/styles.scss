@@ -1,12 +1,5 @@
-
-body{
-    width: 100%;
-    height: 100vh;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: antiquewhite;
-    text-align: center;
-}
+@use "sass-component/default.scss";
+@use "sass-component/buttons.scss";
+@use "sass-component/tasky.scss";
+@use "sass-component/tab-mobil-dist.scss";
+@use "sass-component/structure-app.scss";
