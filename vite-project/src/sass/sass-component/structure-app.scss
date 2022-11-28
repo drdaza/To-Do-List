@@ -1,9 +1,17 @@
+@media only screen and (min-width: 800px){
 #info-app{
-    max-width: 30%;
+    width: 30%;
+    p{
+        width: 90%;
+        text-align: justify;
+        margin: 5%;
+    }
 }
 #list-space{
     width: 35%;
     #list{
-        width: 100%;
+        width: 90%;
+        margin: 5%;
     }
+}
 }
