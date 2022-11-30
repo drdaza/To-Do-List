@@ -10,3 +10,7 @@ export function extractPositionTask(param){
     return parseInt(param);
 
 }
+export function Isrepeated(array, textrepeat){
+    console.log(array.indexOf(textrepeat));
+    return array.indexOf(textrepeat);
+}

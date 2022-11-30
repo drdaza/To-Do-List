@@ -1,4 +1,4 @@
-import { extractPositionTask, isEmpty } from "./AuxiliarFunction";
+import { extractPositionTask, isEmpty, Isrepeated } from "./AuxiliarFunction";
 
 import List from "./List";
 
@@ -14,27 +14,28 @@ export function eventClickAddTask(param){
     TaskButton.addEventListener("click", ()=>{  
         let infoTask = document.getElementById("task").value;
 
-        if(!isEmpty(infoTask)){
-            console.log("hola");
+        if(!isEmpty(infoTask) && Isrepeated(param.GetTask, infoTask)==-1 ){
+            console.log();
+
 
             let space = document.getElementById("list");
             param.set(infoTask);
             console.log(param.GetTask);
             space.innerHTML += /* html */
             `
-                <li class="tasky" id="task-${param.GetTask.length}">
+                <li class="tasky"  id="${infoTask}">
                 <label>
                     ${infoTask}
                 </label>
                 <div>
-                <button class="edit-button" id="edit-button-${param.GetTask.length}">Edit </button>
-                <button class="delete-button" id="delete-button-${param.GetTask.length}">Delete </button>
+                <button class="edit-button" id="edit-button-${infoTask}">Edit </button>
+                <button class="delete-button" id="delete-button-${infoTask}">Delete </button>
                 </div>
                 </li>
             `
         }
         else{
-            alert ("The Task you are trying add is empty");
+            alert ("The Task you are trying add is empty or the task exist");
         }
         document.getElementById("task").value='';
     });
@@ -44,48 +45,56 @@ export function eventClickEditTask(param){
     list.addEventListener("click",(e)=>{
         if(e.target.id != "list"){
             if(e.target.classList=="edit-button"){
-                console.log(e.target.id);
-                let number = extractPositionTask(e.target.id);
-                ModifyTasky(param, number);
+                console.log(e.target.parentNode.parentNode.id);
+                let number = param.GetTask.indexOf(e.target.parentNode.parentNode.id);
+                let modifyId = e.target.parentNode.parentNode.id;
+                /* list.replaceChild(e.target.parentNode.parentNode) */
+                ModifyTasky(param, number,modifyId); 
                 
             }
             if(e.target.classList=="tasky" || e.target.classList=="tasky active"){
                 e.target.classList.toggle(`active`);
             }
             if(e.target.classList=="delete-button"){
-                console.log(e.target.id);
-                let number = extractPositionTask(e.target.id);
+                console.log(e.target.parentNode.parentNode.id);
+                let number = param.GetTask.indexOf(e.target.parentNode.parentNode.id);
+                let modifyId = e.target.parentNode.parentNode.id;
                 console.log(number);
-                RemoveTasky(param, number);
+                RemoveTasky(param, number,modifyId);
             }
         }
         
     })
 }
 
-export function RemoveTasky(param, number){
-    let modify = document.getElementById(`task-${number}`);
+export function RemoveTasky(param, number,id){
+    let modify = document.getElementById(`${id}`);
     let list = document.getElementById(`list`);
-    param.deleteTasks(number-1);
+    param.deleteTasks(number);
     
     list.removeChild(modify);
     console.log(param.GetTask);
-    if(param.GetTask.length>list.children.length){param.GetTask.pop();}
+    /* if(param.GetTask.length>list.children.length){param.GetTask.pop();} */
 }
-export function ModifyTasky(param, number){
-    let modify = document.getElementById(`task-${number}`);
-     let letra = prompt("Modify the actual task");
+export function ModifyTasky(param, number,id){
+    let modify = document.getElementById(`${id}`);
+    let letra = prompt("Modify the actual task");
+    if(!isEmpty(letra) && Isrepeated(param.GetTask, letra)==-1 ){
     console.log(letra);
-    param.modifyTasks(number-1, letra);
+    param.modifyTasks(number, letra);
     console.log(param.GetTask);
+    modify.id = `${letra}`;
     modify.innerHTML = /* html */
                     `   
+                    
                     <label>
                         ${letra}
                     </label>
                     <div>
-                    <button class="edit-button" id="edit-button-${number}">Edit </button>
-                    <button class="delete-button" id="delete-button-${number}">Delete </button>
+                    <button class="edit-button" id="edit-button-${letra}">Edit </button>
+                    <button class="delete-button" id="delete-button-${letra}">Delete </button>
                     </div>
+                    
                     `;
+                }
 }
