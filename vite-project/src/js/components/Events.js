@@ -1,4 +1,5 @@
 import { extractPositionTask, isEmpty, Isrepeated } from "./AuxiliarFunction";
+import { RemoveTasky, ModifyTasky } from "./TaskFunction.js";
 
 import List from "./List";
 
@@ -15,12 +16,8 @@ export function eventClickAddTask(param){
         let infoTask = document.getElementById("task").value;
 
         if(!isEmpty(infoTask) && Isrepeated(param.GetTask, infoTask)==-1 ){
-            console.log();
-
-
             let space = document.getElementById("list");
             param.set(infoTask);
-            console.log(param.GetTask);
             space.innerHTML += /* html */
             `
                 <li class="tasky"  id="${infoTask}">
@@ -45,10 +42,8 @@ export function eventClickEditTask(param){
     list.addEventListener("click",(e)=>{
         if(e.target.id != "list"){
             if(e.target.classList=="edit-button"){
-                console.log(e.target.parentNode.parentNode.id);
                 let number = param.GetTask.indexOf(e.target.parentNode.parentNode.id);
                 let modifyId = e.target.parentNode.parentNode.id;
-                /* list.replaceChild(e.target.parentNode.parentNode) */
                 ModifyTasky(param, number,modifyId); 
                 
             }
@@ -56,10 +51,8 @@ export function eventClickEditTask(param){
                 e.target.classList.toggle(`active`);
             }
             if(e.target.classList=="delete-button"){
-                console.log(e.target.parentNode.parentNode.id);
                 let number = param.GetTask.indexOf(e.target.parentNode.parentNode.id);
                 let modifyId = e.target.parentNode.parentNode.id;
-                console.log(number);
                 RemoveTasky(param, number,modifyId);
             }
         }
@@ -67,34 +60,4 @@ export function eventClickEditTask(param){
     })
 }
 
-export function RemoveTasky(param, number,id){
-    let modify = document.getElementById(`${id}`);
-    let list = document.getElementById(`list`);
-    param.deleteTasks(number);
-    
-    list.removeChild(modify);
-    console.log(param.GetTask);
-    /* if(param.GetTask.length>list.children.length){param.GetTask.pop();} */
-}
-export function ModifyTasky(param, number,id){
-    let modify = document.getElementById(`${id}`);
-    let letra = prompt("Modify the actual task");
-    if(!isEmpty(letra) && Isrepeated(param.GetTask, letra)==-1 ){
-    console.log(letra);
-    param.modifyTasks(number, letra);
-    console.log(param.GetTask);
-    modify.id = `${letra}`;
-    modify.innerHTML = /* html */
-                    `   
-                    
-                    <label>
-                        ${letra}
-                    </label>
-                    <div>
-                    <button class="edit-button" id="edit-button-${letra}">Edit </button>
-                    <button class="delete-button" id="delete-button-${letra}">Delete </button>
-                    </div>
-                    
-                    `;
-                }
-}
+
